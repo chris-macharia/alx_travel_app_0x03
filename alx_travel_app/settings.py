@@ -136,4 +136,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-CELERY_BROKER_URL = 'amqp://localhost'
+# Celery Configuration
+CELERY_BROKER_URL = 'amqp://localhost'  # RabbitMQ broker URL
+CELERY_ACCEPT_CONTENT = ['json']       # Accepted data formats
+CELERY_TASK_SERIALIZER = 'json'        # Task serialization format
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True

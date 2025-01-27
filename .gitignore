@@ -1,3 +1,5 @@
+#Git push key
+git_key.txt
 # Python bytecode files
 __pycache__/
 *.py[cod]

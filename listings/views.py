@@ -1,9 +1,9 @@
 from django.shortcuts import render
-
 # Create your views here.
 from rest_framework import generics, viewsets
 from .models import Listing, Booking
 from .serializers import ListingSerializer, BookingSerializer
+from rest_framework.permissions import IsAuthenticated
 
 class ListingListCreateView(generics.ListCreateAPIView):
     queryset = Listing.objects.all()
@@ -16,6 +16,9 @@ class ListingListCreateView(generics.ListCreateAPIView):
 class BookingListCreateView(generics.ListCreateAPIView):
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 class ListingViewSet(viewsets.ModelViewSet):
     """
@@ -30,3 +33,4 @@ class BookingViewSet(viewsets.ModelViewSet):
     """
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
+    permission_classes = [IsAuthenticated]  # Ensure only authenticated users can book

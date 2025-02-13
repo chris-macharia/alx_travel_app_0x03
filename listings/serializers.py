@@ -35,3 +35,26 @@ class BookingSerializer(serializers.ModelSerializer):
             'created_at',
         ]
         read_only_fields = ['id', 'user', 'total_price', 'created_at']
+
+    def create(self, validated_data):
+        request = self.context.get('request')
+        if request and request.user and request.user.is_authenticated:
+            validated_data['user'] = request.user
+        else:
+            raise serializers.ValidationError("User must be authenticated to create a booking.")
+
+        # Calculate total price
+        start_date = validated_data.get('start_date')
+        end_date = validated_data.get('end_date')
+        listing = validated_data.get('listing')
+
+        if not start_date or not end_date:
+            raise serializers.ValidationError("Start date and end date are required.")
+
+        if end_date <= start_date:
+            raise serializers.ValidationError("End date must be after start date.")
+
+        num_nights = (end_date - start_date).days
+        validated_data['total_price'] = num_nights * listing.price_per_night
+
+        return super().create(validated_data)

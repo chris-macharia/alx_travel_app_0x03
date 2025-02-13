@@ -16,7 +16,7 @@ class ListingSerializer(serializers.ModelSerializer):
             'created_at',
             'updated_at',
         ]
-        read_only_fields = ['id', 'host', 'created_at', 'updated_at']
+        read_only_fields = ['id', 'created_at', 'updated_at']
 
 
 class BookingSerializer(serializers.ModelSerializer):

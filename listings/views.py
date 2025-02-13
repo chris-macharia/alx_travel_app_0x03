@@ -9,6 +9,9 @@ class ListingListCreateView(generics.ListCreateAPIView):
     queryset = Listing.objects.all()
     serializer_class = ListingSerializer
 
+    def perform_create(self, serializer):
+        serializer.save(host=self.request.user)  # Assign logged-in user as host
+
 
 class BookingListCreateView(generics.ListCreateAPIView):
     queryset = Booking.objects.all()

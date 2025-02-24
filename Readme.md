@@ -8,15 +8,15 @@ This is a Django-based web application project structured for scalability and ma
 Below is the directory layout of the project:
 
 ```
-myproject/
+alx_travel_app_0x03/
 ├── manage.py               # Entry point for the Django application
-├── myproject/              # Project-specific configurations
+├── alx_travel_app/              # Project-specific configurations
 │   ├── __init__.py         # Marks the directory as a Python package
 │   ├── settings.py         # Django project settings
 │   ├── urls.py             # URL routing configuration
 │   ├── wsgi.py             # WSGI entry point for deployment
 │   └── asgi.py             # ASGI entry point for async support
-├── myapp/                  # Example application (customize as needed)
+├── listings/                  # Example application (customize as needed)
 │   ├── __init__.py         # Marks the directory as a Python package
 │   ├── admin.py            # Admin site configuration
 │   ├── apps.py             # Application configuration
